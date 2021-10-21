@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Type">
+        <item>餐饮美食</item>
+        <item>服饰装扮</item>
+        <item>日用百货</item>
+        <item>家居家装</item>
+        <item>数码电器</item>
+        <item>运动户外</item>
+        <item>美容美发</item>
+        <item>母婴亲子</item>
+        <item>宠物</item>
+        <item>交通出行</item>
+        <item>爱车养车</item>
+        <item>住房物业</item>
+        <item>酒店旅游</item>
+        <item>文化休闲</item>
+        <item>教育培训</item>
+        <item>医疗健康</item>
+        <item>生活服务</item>
+        <item>公共服务</item>
+        <item>商业服务</item>
+        <item>公益捐赠</item>
+        <item>投资理财</item>
+        <item>保险</item>
+        <item>信用借还</item>
+        <item>充值缴费</item>
+        <item>收入</item>
+        <item>转账红包</item>
+        <item>亲友代付</item>
+        <item>账户存取</item>
+        <item>退款</item>
+        <item>其他</item>
+    </string-array>
+</resources>

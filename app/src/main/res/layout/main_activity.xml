@@ -14,7 +14,6 @@
         <com.google.android.material.circularreveal.CircularRevealLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -28,8 +27,15 @@
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/SkyBlue"
                     app:navigationIcon="@drawable/outline_menu_white_48"
+                    app:layout_scrollFlags="scroll"
                     app:title="记账本" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
             </com.google.android.material.appbar.AppBarLayout>
+
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
         <com.google.android.material.navigation.NavigationView
             android:layout_width="wrap_content"

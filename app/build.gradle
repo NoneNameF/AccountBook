@@ -51,4 +51,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0-alpha05'
 //添加litepal
     implementation 'org.litepal.guolindev:core:3.2.3'
+
+    implementation 'com.github.duanhong169:picker-view:1.0.0'
+
 }

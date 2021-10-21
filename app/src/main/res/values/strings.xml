@@ -1,20 +1,33 @@
 <resources>
     <string name="app_name">CMSAccountBook</string>
-<!--登录界面的String-->
+    <!--登录界面的String-->
     <string name="logInHintName">用户名</string>
     <string name="logInHintPassword">密码</string>
     <string name="rememberMe">记住用户名和密码</string>
     <string name="logInButton">登录</string>
     <string name="registerButton">注册</string>
-<!--主界面的TopBar-->
+    <!--主界面的TopBar-->
     <string name="search_icon">搜索</string>
     <string name="refresh">刷新</string>
     <string name="add_icon">添加</string>
-<!--主界面测滑界面-->
+    <!--主界面测滑界面-->
     <string name="account_name">用户名</string>
     <string name="date_range">指定日期范围</string>
-    <string name="setting">设置</string>
+    <string name="Home">主页</string>
+    <string name="setting">修改密码</string>
     <string name="logout">退出登录</string>
+    <!--注册页面-->
+    <string name="hint_name">请输入账户名</string>
+    <string name="hint_password">请输入密码</string>
+    <string name="hint_password_again">请再次输入密码</string>
+    <string name="returnLogin">返回登录界面</string>
+    <!--修改密码-->
+    <string name="Change">确认修改密码</string>
+    <string name="retuenlast">返回</string>
+    <!--每一项-->
+    <string name="money">金额</string>
+    <string name="data">日期</string>
+    <string name="type">类型</string>
     <string name="title_activity_main2">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -22,6 +35,12 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <!--添加东西的时候用的-->
+    <string name="add">添加</string>
+    <string name="returnMain">返回</string>
+    <string name="chooseMoney">输入金额</string>
+    <string name="chooseType">选择类型</string>
+    <string name="chooseData">选择时间</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>

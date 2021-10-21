@@ -2,11 +2,15 @@ package com.example.accountbook;
 
 import com.google.gson.internal.$Gson$Types;
 
+import org.litepal.LitePal;
+import org.litepal.crud.LitePalSupport;
+
 import java.util.Calendar;
 
 
-public class Account {
-    private int type;               //账单类型
+public class Account extends LitePalSupport {
+    private String belong;          //所属用户
+    private InOrOutType type;               //账单类型
     private double money;           //金额
     private String remark;          //备注
     private Calendar calendar;      //日期
@@ -40,14 +44,14 @@ public class Account {
         family_replace_pay,         //亲友代付
         account_access,             //账户存取
         refund,                     //退款
-        others;                      //其他
+        others;                     //其他
     }
 
-    public int getType() {
+    public InOrOutType getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(InOrOutType type) {
         this.type = type;
     }
 
@@ -75,10 +79,12 @@ public class Account {
         this.calendar = calendar;
     }
 
-    public Account(int type, double money, String remark, Calendar calendar) {
+    public Account(String belong, InOrOutType type, double money, String remark, Calendar calendar) {
+        this.belong = belong;
         this.type = type;
         this.money = money;
         this.remark = remark;
         this.calendar = calendar;
     }
+
 }

@@ -13,11 +13,16 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.App" parent="Theme.MaterialComponents.DayNight"/>
+
+    <style name="Theme.App" parent="Theme.MaterialComponents.DayNight" />
+
     <style name="Theme.AccountBook.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="Theme.AccountBook.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="Theme.AccountBook.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
