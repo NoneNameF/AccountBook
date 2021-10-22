@@ -22,12 +22,13 @@ private User changeuser=new User();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.changepassword);
         ActivityCollector.addActivity(this);
+
         Button button = findViewById(R.id.change);
         button.setOnClickListener(this);
         Button button1=findViewById(R.id.returnHome);
         button1.setOnClickListener(this);
-        Intent intent=getIntent();
-        changeuser.setName(intent.getStringExtra("Name"));
+
+        changeuser.setName(User.LoginName);
     }
     @Override
     public void onClick(View v) {
@@ -44,7 +45,7 @@ private User changeuser=new User();
                 }else {
                     for (User user : Users) {
                         if (user.getName().equals(changeuser.getName())) {
-                            Log.d("USER",""+user.getName()+"   "+user.getPassword());
+//                            Log.d("USER",""+user.getName()+"   "+user.getPassword());
                             changeuser.setPassword(password);
                             changeuser.updateAll("name=?",user.getName());
                             Log.d("USER","修改成功");

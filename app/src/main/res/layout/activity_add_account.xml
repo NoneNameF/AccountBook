@@ -7,24 +7,47 @@
     tools:context=".AddAccount">
 
     <EditText
-        android:id="@+id/Text1"
+        android:id="@+id/addAccountMoney"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
         android:gravity="center"
         android:hint="@string/chooseMoney"
-        android:inputType="textPassword"
+        android:inputType="numberDecimal"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
+        android:id="@+id/ChooseType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/Type"
-        app:layout_constraintStart_toStartOf="@+id/Text1"
-        app:layout_constraintTop_toBottomOf="@+id/Text1" />
+        app:layout_constraintStart_toStartOf="@+id/addAccountMoney"
+        app:layout_constraintTop_toBottomOf="@+id/addAccountMoney" />
 
+    <top.defaults.view.DateTimePickerView
+        android:id="@+id/datePickerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:preferredMaxOffsetItemCount="3"
+        app:textSize="18sp"
+        app:type="yearMonthDayHourMinute"
+        app:minutesInterval="one"
+        app:curved="true"
+        android:background="#e7e7e7"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/remarkText"
+        android:layout_width="match_parent"
+        android:layout_height="250sp"
+        android:gravity="left"
+        android:hint="@string/Remark"
+        android:inputType="numberDecimal"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ChooseType" />
 
     <Button
         android:id="@+id/addAccount"

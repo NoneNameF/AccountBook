@@ -9,12 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AccountBook">
-        <activity android:name=".AddAccount"></activity>
+        <activity android:name=".AddAccount" />
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".registerActivity" />
-        <activity
-            android:name=".MainActivity"
-            android:launchMode="singleTask" />
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

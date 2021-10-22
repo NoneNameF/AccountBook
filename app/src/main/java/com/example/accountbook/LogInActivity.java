@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,14 +32,15 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 //      检测之前是否选择了记住用户
         SharedPreferences pref = getSharedPreferences("UserSave", MODE_PRIVATE);
         if (pref.getBoolean("IsChecked", false)) {
-            EditText editText=findViewById(R.id.LoginName);
-            EditText editText2=findViewById(R.id.LoginPassword);
+            Log.d("USER","用户选择了记住用户");
+            EditText editText = findViewById(R.id.LoginName);
+            EditText editText2 = findViewById(R.id.LoginPassword);
             String name = pref.getString("Name", "");
             String password = pref.getString("Password", "");
             User user = new User(name, password);
-            if(user.SignIn()) ToMain(user);
-            else Toast.makeText(this, "抱歉，登录失败。可能密码已经变更", Toast.LENGTH_SHORT).show();
-        }
+            if (user.SignIn()) ToMain();
+//            else Toast.makeText(this, "抱歉，登录失败。可能密码已经变更", Toast.LENGTH_SHORT).show();
+        }else Log.d("USER","用户没有选择记住用户");
 //      为两个按钮注册点击事件
         Button button1 = findViewById(R.id.loginButton);
         button1.setOnClickListener(this);
@@ -67,7 +69,9 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                     editor.putString("Password", Password);
                     editor.apply();
                 }
-                ToMain(user);
+                User.LoginName = Name;
+                Log.d("USER","登录成功 即将跳转");
+                ToMain();
             } else {
                 Toast.makeText(this, "抱歉，登录失败", Toast.LENGTH_SHORT).show();
             }
@@ -76,13 +80,13 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void ToMain(User user){
+    private void ToMain() {
         Intent intent = new Intent(LogInActivity.this, MainActivity.class);
-        intent.putExtra("IntentName",user.getName());
         startActivity(intent);
         finish();
     }
-    private void ToRegister(){
+
+    private void ToRegister() {
         Intent intent = new Intent(LogInActivity.this, registerActivity.class);
         startActivity(intent);
     }

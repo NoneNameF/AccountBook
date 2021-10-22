@@ -41,7 +41,7 @@
     <string name="chooseMoney">输入金额</string>
     <string name="chooseType">选择类型</string>
     <string name="chooseData">选择时间</string>
-
+    <string name="Remark">请输入备注</string>
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>

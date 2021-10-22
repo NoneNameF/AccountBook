@@ -16,10 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,17 +27,16 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private CharSequence UserName = null;
+
     private final List<Account> accountList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        Log.d("USER", "进入MainActivity");
+//将此Activity添加进管理
         ActivityCollector.addActivity(this);
-//获取用户的用户名
-        Intent intent = getIntent();
-        UserName = intent.getStringExtra("IntentName");
 //将系统默认的actionbar取消了 使用自己写的Toolbar 想要菜单显示在Toolbar上就要先把toolbar设为Actionbar
         Toolbar toolbar = findViewById(R.id.main_appbar);
         setSupportActionBar(toolbar);
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //在网上找到几个方法 尝试view.inflate加载 但是失败
 //所以干脆写到点击事件里 每次打开抽屉都检查更改一次
                 TextView textView = findViewById(R.id.UserName);
-                textView.setText(UserName);
+                textView.setText(User.LoginName);
             }
         });
 //为侧边滑栏设置点击事件
@@ -65,25 +64,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void testCode() {
-        int x = 5;
-        while ((x--) != 0) {
-            Calendar calendar = new GregorianCalendar();
-            Account account = new Account(UserName.toString(),Account.InOrOutType.food, 32.8, "test1", calendar);
-            accountList.add(account);
-            Account account1 = new Account(UserName.toString(),Account.InOrOutType.beauty_hair, 3.8, "test2", calendar);
-            accountList.add(account1);
-            Account account2 = new Account(UserName.toString(),Account.InOrOutType.cars, 56.8, "test3", calendar);
-            accountList.add(account2);
-            Account account3 = new Account(UserName.toString(),Account.InOrOutType.clothes, 122.8, "test4", calendar);
-            accountList.add(account3);
-        }
-        RecyclerView recyclerView=findViewById(R.id.RecyclerView);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        AccountAdapter accountAdapter=new AccountAdapter(accountList);
-        recyclerView.setAdapter(accountAdapter);
+        Log.d("USER","开始添加内容");
+//        int x = 5;
+//        while ((x--) != 0) {
+//            Calendar calendar = new GregorianCalendar();
+//            Account account = new Account(User.LoginName.toString(),Account.InOrOutType.food, 32.8, "test1", calendar);
+//            accountList.add(account);
+//            Account account1 = new Account(User.LoginName.toString(),Account.InOrOutType.beauty_hair, 3.8, "test2", calendar);
+//            accountList.add(account1);
+//            Account account2 = new Account(User.LoginName.toString(),Account.InOrOutType.cars, 56.8, "test3", calendar);
+//            accountList.add(account2);
+//            Account account3 = new Account(User.LoginName.toString(),Account.InOrOutType.clothes, 122.8, "test4", calendar);
+//            accountList.add(account3);
+//        }
+//        RecyclerView recyclerView=findViewById(R.id.RecyclerView);
+//        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        AccountAdapter accountAdapter=new AccountAdapter(accountList);
+//        recyclerView.setAdapter(accountAdapter);
+
+//        if (accounts.isEmpty())Log.d("USER","数据空");
+//        else{
+//
+//        }
+//        Account account=accounts.get(0);
+//        if (account==null)Log.d("USER","空的account实例");
+//        else Log.d("USER",account.getBelong());
+//        for (Account account:accounts){
+//            Account a = new Account(
+//                    account.getBelong(),
+//                    account.getType(),
+//                    account.getMoney(),
+//                    account.getRemark(),
+//                    account.getCalendar());
+//            accountList.add(a);
+//        }
+
     }
-//侧面滑栏的点击事件
+
+    //侧面滑栏的点击事件
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -98,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //跳转到修改密码的界面
             case R.id.setting:
                 intent = new Intent(MainActivity.this, ChangePasswordActivity.class);
-                intent.putExtra("Name", UserName);
                 startActivity(intent);
                 break;
 //退出登录 跳转到登录界面
@@ -121,7 +139,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-//右上角Item的点击事件
+
+    //右上角Item的点击事件
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -130,13 +149,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 break;
             case R.id.refresh:
-
+                testCode();
                 break;
             case R.id.add:
-Intent intent=new Intent(MainActivity.this,AddAccount.class);
-startActivity(intent);
-                break;
+                Intent intent = new Intent(MainActivity.this, AddAccount.class);
+                startActivity(intent);
 
+                break;
         }
         return true;
     }
