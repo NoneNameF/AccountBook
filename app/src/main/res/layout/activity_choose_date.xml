@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChooseDate">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/ChooseDataBegin"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <top.defaults.view.DateTimePickerView
+        android:id="@+id/ChooseDataBegin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e7e7e7"
+        app:curved="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:minutesInterval="one"
+        app:preferredMaxOffsetItemCount="3"
+        app:textSize="18sp"
+        app:type="yearMonthDayHourMinute"
+        tools:ignore="MissingConstraints" >
+
+    </top.defaults.view.DateTimePickerView>
+
+    <top.defaults.view.DateTimePickerView
+        android:id="@+id/ChooseDataDone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e7e7e7"
+        app:curved="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/ChooseDataBegin"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:minutesInterval="one"
+        app:preferredMaxOffsetItemCount="3"
+        app:textSize="18sp"
+        app:type="yearMonthDayHourMinute"
+        tools:ignore="MissingConstraints">
+
+    </top.defaults.view.DateTimePickerView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="@string/ChooseDataDone"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/ChooseDataBegin" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/find"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="84dp"
+
+        android:text="查询"
+        app:layout_constraintStart_toStartOf="@+id/ChooseDataDone"
+        app:layout_constraintTop_toBottomOf="@+id/ChooseDataDone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/choosereturnmain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:text="返回"
+        app:layout_constraintStart_toEndOf="@+id/find"
+        app:layout_constraintTop_toTopOf="@+id/find" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

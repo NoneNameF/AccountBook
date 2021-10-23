@@ -6,12 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
-        app:strokeColor="@color/purple_200"
-        app:strokeWidth="4sp"
         android:layout_width="match_parent"
         android:layout_height="70sp"
-        app:cardCornerRadius="10sp"
         app:cardBackgroundColor="@color/test"
+        app:cardCornerRadius="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/purple_200"
+        app:strokeWidth="4sp"
         tools:ignore="MissingConstraints">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,11 +23,21 @@
                 android:id="@+id/MoneyCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="72dp"
                 android:text="@string/money"
                 android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/deletebutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_delete_white_48"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.666" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -40,7 +51,7 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/data"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"

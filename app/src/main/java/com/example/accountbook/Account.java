@@ -2,9 +2,7 @@ package com.example.accountbook;
 
 import org.litepal.crud.LitePalSupport;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
+import java.util.List;
 
 public class Account extends LitePalSupport {
     private final String belong;          //所属用户
@@ -16,8 +14,9 @@ public class Account extends LitePalSupport {
     private int day;
     private int hour;
     private int min;
-
-    public enum InOrOutType {
+private long ID;
+private long sec;
+    public static enum  InOrOutType {
         food,                       //餐饮美食
         clothes,                    //服饰装扮
         general_merchandise,        //日用百货
@@ -50,11 +49,42 @@ public class Account extends LitePalSupport {
         others                      //其他
     }
 
-    public InOrOutType getType() {
-        return StringToInOrOutType(this.type);
+    public Account(String belong, InOrOutType type, double money, String remark, int year, int month, int day, int hour, int min, long ID, long sec) {
+        this.belong = belong;
+        this.type = InOrOutTypeToString(type);
+        this.money = money;
+        this.remark = remark;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.min = min;
+        this.ID = ID;
+        this.sec = sec;
     }
 
-    public void setType(InOrOutType type) {
+    public long getID() {
+        return ID;
+    }
+
+    public void setID(long ID) {
+        
+        this.ID = ID;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public long getSec() {
+        return sec;
+    }
+
+    public void setSec(long sec) {
+        this.sec = sec;
+    }
+
+    public void setType(Account.InOrOutType type) {
         this.type = InOrOutTypeToString(type);
     }
 
@@ -74,130 +104,153 @@ public class Account extends LitePalSupport {
         this.remark = remark;
     }
 
-    public Calendar getCalendar() {
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(this.year, this.month - 1, this.day, this.hour, this.min);
-        return calendar;
-    }
-
-    public void setCalendar(Calendar calendar) {
-        this.year = calendar.get(Calendar.YEAR);
-        this.month = calendar.get(Calendar.MONTH)+1;
-        this.day = calendar.get(Calendar.DAY_OF_MONTH);
-        this.hour = calendar.get(Calendar.HOUR_OF_DAY);
-        this.min = calendar.get(Calendar.MINUTE);
-    }
 
     public String getBelong() {
         return belong;
     }
 
-    public Account(String belong, InOrOutType type, double money, String remark, Calendar calendar) {
-        this.belong = belong;
-        this.type = InOrOutTypeToString(type);
-        this.money = money;
-        this.remark = remark;
-        setCalendar(calendar);
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public static InOrOutType StringToInOrOutType(String str) {
-        InOrOutType uploadType = InOrOutType.food;
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public static Account.InOrOutType StringToInOrOutType(String str) {
+        Account.InOrOutType uploadType = Account.InOrOutType.food;
         switch (str) {
             case "餐饮美食":
-                uploadType = InOrOutType.food;
+                uploadType = Account.InOrOutType.food;
                 break;
             case "服饰装扮":
-                uploadType = InOrOutType.clothes;
+                uploadType = Account.InOrOutType.clothes;
                 break;
             case "日用百货":
-                uploadType = InOrOutType.general_merchandise;
+                uploadType = Account.InOrOutType.general_merchandise;
                 break;
             case "家居家装":
-                uploadType = InOrOutType.household_decoration;
+                uploadType = Account.InOrOutType.household_decoration;
                 break;
             case "数码电器":
-                uploadType = InOrOutType.digital_products;
+                uploadType = Account.InOrOutType.digital_products;
                 break;
             case "运动户外":
-                uploadType = InOrOutType.sports;
+                uploadType = Account.InOrOutType.sports;
                 break;
             case "美容美发":
-                uploadType = InOrOutType.beauty_hair;
+                uploadType = Account.InOrOutType.beauty_hair;
                 break;
             case "母婴亲子":
-                uploadType = InOrOutType.family;
+                uploadType = Account.InOrOutType.family;
                 break;
             case "宠物":
-                uploadType = InOrOutType.pets;
+                uploadType = Account.InOrOutType.pets;
                 break;
             case "交通出行":
-                uploadType = InOrOutType.traffic;
+                uploadType = Account.InOrOutType.traffic;
                 break;
             case "爱车养车":
-                uploadType = InOrOutType.cars;
+                uploadType = Account.InOrOutType.cars;
                 break;
             case "住房物业":
-                uploadType = InOrOutType.housing;
+                uploadType = Account.InOrOutType.housing;
                 break;
             case "酒店旅游":
-                uploadType = InOrOutType.hotel;
+                uploadType = Account.InOrOutType.hotel;
                 break;
             case "文化休闲":
-                uploadType = InOrOutType.cultural_leisure;
+                uploadType = Account.InOrOutType.cultural_leisure;
                 break;
             case "教育培训":
-                uploadType = InOrOutType.education;
+                uploadType = Account.InOrOutType.education;
                 break;
             case "医疗健康":
-                uploadType = InOrOutType.health;
+                uploadType = Account.InOrOutType.health;
                 break;
             case "生活服务":
-                uploadType = InOrOutType.live_service;
+                uploadType = Account.InOrOutType.live_service;
                 break;
             case "公共服务":
-                uploadType = InOrOutType.public_service;
+                uploadType = Account.InOrOutType.public_service;
                 break;
             case "商业服务":
-                uploadType = InOrOutType.business_service;
+                uploadType = Account.InOrOutType.business_service;
                 break;
             case "公益捐赠":
-                uploadType = InOrOutType.donate;
+                uploadType = Account.InOrOutType.donate;
                 break;
             case "投资理财":
-                uploadType = InOrOutType.invest;
+                uploadType = Account.InOrOutType.invest;
                 break;
             case "保险":
-                uploadType = InOrOutType.insurance;
+                uploadType = Account.InOrOutType.insurance;
                 break;
             case "信用借还":
-                uploadType = InOrOutType.borrow_and_return;
+                uploadType = Account.InOrOutType.borrow_and_return;
                 break;
             case "充值缴费":
-                uploadType = InOrOutType.payment;
+                uploadType = Account.InOrOutType.payment;
                 break;
             case "收入":
-                uploadType = InOrOutType.income;
+                uploadType = Account.InOrOutType.income;
                 break;
             case "转账红包":
-                uploadType = InOrOutType.red_envelope;
+                uploadType = Account.InOrOutType.red_envelope;
                 break;
             case "亲友代付":
-                uploadType = InOrOutType.family_replace_pay;
+                uploadType = Account.InOrOutType.family_replace_pay;
                 break;
             case "账户存取":
-                uploadType = InOrOutType.account_access;
+                uploadType = Account.InOrOutType.account_access;
                 break;
             case "退款":
-                uploadType = InOrOutType.refund;
+                uploadType = Account.InOrOutType.refund;
                 break;
             case "其他":
-                uploadType = InOrOutType.others;
+                uploadType = Account.InOrOutType.others;
                 break;
         }
         return uploadType;
     }
 
-    public static String InOrOutTypeToString(InOrOutType inOrOutType) {
+    public static String InOrOutTypeToString(Account.InOrOutType inOrOutType) {
         String str = "餐饮美食";
         switch (inOrOutType) {
             case food:
@@ -293,4 +346,5 @@ public class Account extends LitePalSupport {
         }
         return str;
     }
+
 }

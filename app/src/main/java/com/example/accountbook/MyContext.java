@@ -7,7 +7,7 @@ public class MyContext {
     @SuppressLint("StaticFieldLeak")
     private static Context context;
 
-    public MyContext(Context context) {
+    public static void setContext(Context context) {
         MyContext.context = context;
     }
 

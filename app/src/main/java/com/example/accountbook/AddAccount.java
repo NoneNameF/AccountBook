@@ -10,9 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.litepal.LitePal;
+
 import java.util.Calendar;
+
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import top.defaults.view.DateTimePickerView;
@@ -26,14 +31,15 @@ public class AddAccount extends AppCompatActivity implements View.OnClickListene
     private String UserName;
     private String[] type;
     private Account.InOrOutType uploadType;
-    private Calendar calendar = new GregorianCalendar();
+    private final Calendar calendar = new GregorianCalendar();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
-        Log.d("USER","进入添加界面");
+        ActivityCollector.addActivity(this);
+        Log.d("USER", "进入添加界面");
 
 //配置DateTimePickerView
         DateTimePickerView dateTimePickerView = findViewById(R.id.datePickerView);
@@ -42,7 +48,7 @@ public class AddAccount extends AppCompatActivity implements View.OnClickListene
         dateTimePickerView.setOnSelectedDateChangedListener(new DateTimePickerView.OnSelectedDateChangedListener() {
             public void onSelectedDateChanged(Calendar date) {
                 year = date.get(Calendar.YEAR);
-                month = date.get(Calendar.MONTH) + 1;
+                month = date.get(Calendar.MONTH);
                 dayOfMonth = date.get(Calendar.DAY_OF_MONTH);
                 hour = date.get(Calendar.HOUR_OF_DAY);
                 minute = date.get(Calendar.MINUTE);
@@ -50,7 +56,8 @@ public class AddAccount extends AppCompatActivity implements View.OnClickListene
 //                Toast.makeText(AddAccount.this, dateString, Toast.LENGTH_SHORT).show();
             }
         });
-        Log.d("USER","配置DateTimePickerView完成");
+
+        Log.d("USER", "配置DateTimePickerView完成");
 //注册Spinner选中事件
         Spinner spinner = findViewById(R.id.ChooseType);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -66,13 +73,13 @@ public class AddAccount extends AppCompatActivity implements View.OnClickListene
 
             }
         });
-        Log.d("USER","注册Spinner选中事件完成");
+        Log.d("USER", "注册Spinner选中事件完成");
 //注册按键
         Button button = findViewById(R.id.addAccount);
         Button button1 = findViewById(R.id.returnMain);
         button.setOnClickListener(this);
         button1.setOnClickListener(this);
-        Log.d("USER","按键配置完成");
+        Log.d("USER", "按键配置完成");
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -83,20 +90,31 @@ public class AddAccount extends AppCompatActivity implements View.OnClickListene
             case R.id.addAccount:
                 Log.d("USER", "开始添加");
                 EditText editText = findViewById(R.id.addAccountMoney);
-                String money;
-                money = editText.getText().toString();
-//                Log.d("USER",money);
+                String money = editText.getText().toString();
                 EditText editText1 = findViewById(R.id.remarkText);
-                calendar.set(year, month - 1, dayOfMonth, hour, minute);
-                if (calendar == null) Log.d("USER", "空的时间实例");
+                String remark = editText1.getText().toString();
                 Log.d("USER", "开始构造account实例");
+                Log.d("USER", "USER==" + User.LoginName);
+//                Log.d("USER", Account.InOrOutTypeToString(uploadType));
+                Account account2= LitePal.findLast(Account.class);
+                long ID;
+                if (account2==null) ID=0;
+                else ID=account2.getID();
+                Calendar calendar=new GregorianCalendar();
+                calendar.clear();
+                calendar.set(year, month, dayOfMonth, hour, minute);
+                Log.d("USER",String.valueOf(ID));
                 Account account = new Account(
                         User.LoginName,
                         uploadType,
                         Double.parseDouble(money),
-                        editText1.getText().toString(),
-                        calendar);
+                        remark,
+                        year, month, dayOfMonth, hour, minute,
+                        ID,
+                        calendar.getTimeInMillis()/1000);
+//                Log.d("USER", account.getType());
                 account.save();
+
                 Log.d("USER", "添加成功");
                 startActivity(intent);
                 finish();

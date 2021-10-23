@@ -24,9 +24,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         ActivityCollector.addActivity(this);
-//      生成全局Context
-        Context context = getApplicationContext();
-        MyContext myContext = new MyContext(context);
+//生成全局Context
+        MyContext.setContext(getApplicationContext());
 //      初始化Litepal
         LitePal.initialize(MyContext.getContext());
 //      检测之前是否选择了记住用户
@@ -38,8 +37,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             String name = pref.getString("Name", "");
             String password = pref.getString("Password", "");
             User user = new User(name, password);
-            if (user.SignIn()) ToMain();
-//            else Toast.makeText(this, "抱歉，登录失败。可能密码已经变更", Toast.LENGTH_SHORT).show();
+            if (user.SignIn()) {User.LoginName = name;ToMain();}
+            else Toast.makeText(this, "抱歉，登录失败。可能密码已经变更", Toast.LENGTH_SHORT).show();
         }else Log.d("USER","用户没有选择记住用户");
 //      为两个按钮注册点击事件
         Button button1 = findViewById(R.id.loginButton);

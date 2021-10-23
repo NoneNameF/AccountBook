@@ -7,6 +7,7 @@
     <string name="logInButton">登录</string>
     <string name="registerButton">注册</string>
     <!--主界面的TopBar-->
+    <string name="delete">删除</string>
     <string name="search_icon">搜索</string>
     <string name="refresh">刷新</string>
     <string name="add_icon">添加</string>
@@ -26,6 +27,7 @@
     <string name="retuenlast">返回</string>
     <!--每一项-->
     <string name="money">金额</string>
+    <string name="idnumber">ID号</string>
     <string name="data">日期</string>
     <string name="type">类型</string>
     <string name="title_activity_main2">MainActivity</string>
@@ -45,4 +47,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="ChooseDataBegin">选择开始时间</string>
+    <string name="ChooseDataDone">选择结束时间</string>
 </resources>

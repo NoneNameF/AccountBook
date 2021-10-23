@@ -44,7 +44,7 @@
         android:layout_height="250sp"
         android:gravity="left"
         android:hint="@string/Remark"
-        android:inputType="numberDecimal"
+        android:inputType="textMultiLine"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ChooseType" />

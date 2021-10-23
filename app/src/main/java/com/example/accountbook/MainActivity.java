@@ -1,6 +1,7 @@
 package com.example.accountbook;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,14 +17,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         Log.d("USER", "进入MainActivity");
+        MyContext.setContext(getApplicationContext());
 //将此Activity添加进管理
         ActivityCollector.addActivity(this);
 //将系统默认的actionbar取消了 使用自己写的Toolbar 想要菜单显示在Toolbar上就要先把toolbar设为Actionbar
@@ -60,46 +62,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setCheckedItem(R.id.Home);
         navigationView.setNavigationItemSelectedListener(this);
 //测试代码  测试列表是不是正常工作
-        testCode();
+        refresh();
     }
 
-    private void testCode() {
-        Log.d("USER","开始添加内容");
-//        int x = 5;
-//        while ((x--) != 0) {
-//            Calendar calendar = new GregorianCalendar();
-//            Account account = new Account(User.LoginName.toString(),Account.InOrOutType.food, 32.8, "test1", calendar);
-//            accountList.add(account);
-//            Account account1 = new Account(User.LoginName.toString(),Account.InOrOutType.beauty_hair, 3.8, "test2", calendar);
-//            accountList.add(account1);
-//            Account account2 = new Account(User.LoginName.toString(),Account.InOrOutType.cars, 56.8, "test3", calendar);
-//            accountList.add(account2);
-//            Account account3 = new Account(User.LoginName.toString(),Account.InOrOutType.clothes, 122.8, "test4", calendar);
-//            accountList.add(account3);
-//        }
-//        RecyclerView recyclerView=findViewById(R.id.RecyclerView);
-//        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        AccountAdapter accountAdapter=new AccountAdapter(accountList);
-//        recyclerView.setAdapter(accountAdapter);
-
-//        if (accounts.isEmpty())Log.d("USER","数据空");
-//        else{
-//
-//        }
-//        Account account=accounts.get(0);
-//        if (account==null)Log.d("USER","空的account实例");
-//        else Log.d("USER",account.getBelong());
-//        for (Account account:accounts){
-//            Account a = new Account(
-//                    account.getBelong(),
-//                    account.getType(),
-//                    account.getMoney(),
-//                    account.getRemark(),
-//                    account.getCalendar());
-//            accountList.add(a);
-//        }
-
+    private void refresh() {
+        Log.d("USER", "开始添加内容");
+        ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setTitle("请等待加载");
+        progressDialog.setMessage("正在加载中");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        List<Account> Accounts = LitePal.where("belong=?", User.LoginName).order("sec desc").find(Account.class);
+        accountList.clear();
+        Log.d("USER", "获取数据库");
+        if (Accounts.isEmpty()) Log.d("USER", "数据空");
+        else {
+            Log.d("USER", "开始整合");
+            for (Account account1 : Accounts) {
+//虽然有更好的办法 但是我在这一步耽误太多时间了不想想了 所以就用了笨办法
+                String belong = account1.getBelong();
+                String type = account1.getType();
+                double money = account1.getMoney();
+                String remark = account1.getRemark();
+                int year = account1.getYear();
+                int month = account1.getMonth();
+                int day = account1.getDay();
+                int hour = account1.getHour();
+                int min = account1.getHour();
+                long ID=account1.getID();
+                long sec=account1.getSec();
+                Account account = new Account(belong, Account.StringToInOrOutType(type), money, remark, year, month, day, hour, min,ID,sec);
+                Log.d("USER", account.getType());
+                accountList.add(account);
+            }
+            Log.d("USER", "整合完成");
+            RecyclerView recyclerView = findViewById(R.id.RecyclerView);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            AccountAdapter accountAdapter = new AccountAdapter(accountList, this);
+            recyclerView.setAdapter(accountAdapter);
+        }
+        progressDialog.cancel();
     }
 
     //侧面滑栏的点击事件
@@ -112,7 +115,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.search:
-                Toast.makeText(this, "search", Toast.LENGTH_SHORT).show();
+                intent=new Intent(MainActivity.this,ChooseDate.class);
+                startActivity(intent);
+                Toast.makeText(this, "没有实现这个功能", Toast.LENGTH_SHORT).show();
                 break;
 //跳转到修改密码的界面
             case R.id.setting:
@@ -145,11 +150,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.search:
-
-                break;
             case R.id.refresh:
-                testCode();
+                refresh();
                 break;
             case R.id.add:
                 Intent intent = new Intent(MainActivity.this, AddAccount.class);
