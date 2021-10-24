@@ -96,12 +96,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 accountList.add(account);
             }
             Log.d("USER", "整合完成");
-            RecyclerView recyclerView = findViewById(R.id.RecyclerView);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-            recyclerView.setLayoutManager(linearLayoutManager);
-            AccountAdapter accountAdapter = new AccountAdapter(accountList, this);
-            recyclerView.setAdapter(accountAdapter);
         }
+        RecyclerView recyclerView = findViewById(R.id.RecyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        AccountAdapter accountAdapter = new AccountAdapter(accountList, this);
+        recyclerView.setAdapter(accountAdapter);
         progressDialog.cancel();
     }
 
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.search:
                 intent=new Intent(MainActivity.this,ChooseDate.class);
                 startActivity(intent);
-                Toast.makeText(this, "没有实现这个功能", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "没有实现这个功能", Toast.LENGTH_SHORT).show();
                 break;
 //跳转到修改密码的界面
             case R.id.setting:

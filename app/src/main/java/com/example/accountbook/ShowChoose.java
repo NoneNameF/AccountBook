@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,7 +38,11 @@ public class ShowChoose extends AppCompatActivity {
         List<Account> Accounts = LitePal.where("belong=?", User.LoginName).order("sec desc").find(Account.class);
         accountList.clear();
         Log.d("USER", "获取数据库");
-        if (Accounts.isEmpty()) Log.d("USER", "数据空");
+        if (Accounts.isEmpty()) {
+            Log.d("USER", "数据空");
+            TextView textView=findViewById(R.id.nothings);
+            textView.setText("这里什么也没有");
+        }
         else {
             Log.d("USER", "开始整合");
             for (Account account1 : Accounts) {
@@ -57,6 +62,10 @@ public class ShowChoose extends AppCompatActivity {
                 if ((account.getSec()<begin) || (account.getSec()>done)) continue;
                 Log.d("USER", account.getType());
                 accountList.add(account);
+            }
+            if (accountList.isEmpty()){
+                TextView textView=findViewById(R.id.nothings);
+                textView.setText("这里什么也没有");
             }
             Log.d("USER", "整合完成");
             RecyclerView recyclerView = findViewById(R.id.RecyclerViewShowChoose);
