@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AccountBook">
-        <activity android:name=".ShowChoose"></activity>
+        <activity android:name=".ShowChoose" />
         <activity android:name=".ChooseDate" />
         <activity android:name=".AddAccount" />
         <activity android:name=".ChangePasswordActivity" />

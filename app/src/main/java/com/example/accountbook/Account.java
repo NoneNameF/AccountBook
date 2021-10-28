@@ -1,9 +1,17 @@
 package com.example.accountbook;
 
+import org.jetbrains.annotations.Contract;
 import org.litepal.crud.LitePalSupport;
 
-import java.util.List;
+import java.util.Calendar;
 
+/*** 这个类是账单的类 本应使用Data类型 但查询后Java中Data许多方法已经弃用 推荐使用Calendar 但数据库不支持Calender类所以
+ * 为了快捷 牺牲性能 将日期信息分开存储
+ * @author CMS
+ * @param belong String类型 用来表示该账单属于那个用户
+ *        type   String类型 用来表示账单类型 使用InOrOutType枚举类型表示 提供StringToInOrOutType和InOrOutTypeToString方法进行转换
+ *        money  Double类型 用来表示账单的金额
+ *        remark 用来显示账单的备注*/
 public class Account extends LitePalSupport {
     private final String belong;          //所属用户
     private String type;       //账单类型
@@ -14,9 +22,10 @@ public class Account extends LitePalSupport {
     private int day;
     private int hour;
     private int min;
-private long ID;
-private long sec;
-    public static enum  InOrOutType {
+    private long ID;
+    private long sec;
+
+    public enum InOrOutType {
         food,                       //餐饮美食
         clothes,                    //服饰装扮
         general_merchandise,        //日用百货
@@ -68,7 +77,7 @@ private long sec;
     }
 
     public void setID(long ID) {
-        
+
         this.ID = ID;
     }
 

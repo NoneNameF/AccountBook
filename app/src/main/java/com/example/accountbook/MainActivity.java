@@ -26,7 +26,10 @@ import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+* @author CMS
+*
+* */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private final List<Account> accountList = new ArrayList<>();
@@ -75,8 +78,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         List<Account> Accounts = LitePal.where("belong=?", User.LoginName).order("sec desc").find(Account.class);
         accountList.clear();
         Log.d("USER", "获取数据库");
-        if (Accounts.isEmpty()) Log.d("USER", "数据空");
+        if (Accounts.isEmpty()) {
+            Log.d("USER", "数据空");
+            TextView textView=findViewById(R.id.mainnothings);
+            textView.setText("这里什么也没有");
+        }
         else {
+            TextView textView=findViewById(R.id.mainnothings);
+            textView.setText("");
             Log.d("USER", "开始整合");
             for (Account account1 : Accounts) {
 //虽然有更好的办法 但是我在这一步耽误太多时间了不想想了 所以就用了笨办法
@@ -156,7 +165,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.add:
                 Intent intent = new Intent(MainActivity.this, AddAccount.class);
                 startActivity(intent);
-
                 break;
         }
         return true;
